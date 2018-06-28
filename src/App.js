@@ -1,38 +1,23 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 
-import Infos from './components/Infos';
-import ReposList from './components/ReposList';
-import StarredList from './components/StarredList';
+import Infos from './components/Infos'
+import List from './components/List'
+
+const infoApiURL = 'https://api.github.com/users/Rikezenho'
+const reposApiURL = 'https://api.github.com/users/Rikezenho/repos'
+const starredApiURL = 'https://api.github.com/users/Rikezenho/starred'
 
 class App extends Component {
-  state = {
-    infoData: false,
-    infoReposListData: false,
-    infoStarredListData: false
-  }
-
-  componentDidMount() {
-    setTimeout(() => this.setState({ infoData: true }), 1000);
-    setTimeout(() => this.setState({ infoReposListData: true }), 1500);
-    setTimeout(() => this.setState({ infoStarredListData: true }), 2000);
-  }
-
   render() {
-    const {
-      infoData,
-      infoReposListData,
-      infoStarredListData
-    } = this.state;
-
     return (
       <div className="App">
-        <Infos data={infoData} />
-        <ReposList data={infoReposListData} />
-        <StarredList data={infoStarredListData} />
+        <Infos apiUrl={infoApiURL} />
+        <List apiUrl={reposApiURL} title='Minha lista de repos:' />
+        <List apiUrl={starredApiURL} title='Minha lista de favoritos:' />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

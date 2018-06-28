@@ -1,19 +1,25 @@
-import React from 'react';
-import { withLoading } from '../hocs/withLoading';
+import React from 'react'
+import { fetchAPI } from '../hocs/fetchAPI'
+import { withLoading } from '../hocs/withLoading'
 
-const Infos = () => (
-  <ul style={{ clear: 'both', display: 'block', listStyle: 'none' }}>
-    <li>
-      <img
-        alt="me"
-        src='https://avatars3.githubusercontent.com/u/932808?s=460&v=4'
-        style={{ margin: '0 auto' }}
-      />
-    </li>
-    <li>My name: Henrique Kuwai</li>
-    <li>My username: rikezenho</li>
-    <li>My login: rikezenho</li>
-  </ul>
-);
+const Infos = ({ data }) => {
+  const { avatar_url, login, name } = data
 
-export default withLoading(Infos);
+  return (
+    <ul style={{ clear: 'both', display: 'block', listStyle: 'none' }}>
+      <li>
+        <img
+          alt="me"
+          src={avatar_url}
+          style={{ maxWidth: '200px', margin: '0 auto' }}
+        />
+      </li>
+      <li>My name: {name}</li>
+      <li>My username: {login}</li>
+    </ul>
+  )
+}
+
+const InfosLoading = withLoading(Infos)
+
+export default fetchAPI(InfosLoading)
